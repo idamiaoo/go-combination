@@ -1,19 +1,17 @@
 package combinnations
 
-type combinnations struct {
+// Combinnations 组合描述
+type Combinnations struct {
 	n    int
 	k    int
 	comb []int
 }
 
-//NewConmbinnations ,,,
-func NewConmbinnations() *combinnations {
-	return &combinnations{}
-}
-
-func (c *combinnations) Init(n, k int) bool {
+// NewConmbinnations ...
+func NewConmbinnations(n, k int) *Combinnations {
+	c := &Combinnations{}
 	if k > n || k <= 0 {
-		return false
+		return nil
 	}
 	c.n = n
 	c.k = k
@@ -21,10 +19,11 @@ func (c *combinnations) Init(n, k int) bool {
 	for i := 0; i < k; i++ {
 		c.comb[i] = i
 	}
-	return true
+	return c
 }
 
-func (c *combinnations) Next() bool {
+// Next 生成下一个组合
+func (c *Combinnations) Next() bool {
 	ii := c.k - 1
 	for ii >= 0 && c.comb[ii]+c.k+1 > c.n+ii {
 		ii--
@@ -41,6 +40,7 @@ func (c *combinnations) Next() bool {
 	return true
 }
 
-func (c *combinnations) Comb() []int {
+// Comb 取出组合
+func (c *Combinnations) Comb() []int {
 	return c.comb
 }
